@@ -1,0 +1,20 @@
+begin
+  require 'rubygems'
+  gem 'pdf-writer'
+  require 'fmk_pdf'
+  require 'fmk_pdf_lang'
+
+rescue LoadError => le
+    
+  if le.message =~ %r{pdf/techbook$}
+        root = File.dirname(File.dirname(File.expand_path(__FILE__)))
+	$LOAD_PATH.unshift(File.join(root, "lib"))
+	require 'pdf/techbook'
+  else
+        raise
+   end
+
+end
+
+PDF::FmkPdf.run(ARGV)
+
